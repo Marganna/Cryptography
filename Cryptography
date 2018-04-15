@@ -5,10 +5,10 @@ from the many candidates across the mathematics.
 
 Plaintext == The original message in its original legible form.
 
-Cuphertext == Encrypted text that will appear to be a random string.
+Ciphertext == Encrypted text that will appear to be a random string.
 
-Encryption == Process of converting data from the cryptic which prevents unauthorized access [ converting plaintext to 
-ciphertext. The key required to provide information for the implementation of the encryption algorithm.
+Encryption == Process of converting data from the cryptic which prevents unauthorized access [converting plaintext to 
+ciphertext]. The key required to provide information for the implementation of the encryption algorithm.
 
 Decription == Converting encrypted data into original  which requires decryption key to provide information to 'undo'
 the encryption.
