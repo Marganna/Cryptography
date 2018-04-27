@@ -13,3 +13,103 @@ ciphertext]. The key required to provide information for the implementation of t
 Decription == Converting encrypted data into original  which requires decryption key to provide information to 'undo'
 the encryption.
 
+
+Cryptoanalysis == breaking ciphers which uses different analyses s.t. math analyses, logical analysis, side-channel analysis
+on a cipher to attempt.
+
+Steganography == @covered writing@ the science of hiding information @ in plain sight@. completelu obscure the existence 
+of information instead of concealing its content. interception of encryped message is a evidance the existence of a secret
+[looks like gilberish]. E.G. Mona-LIza.
+
+Cryptography & steganography could be used together. Could be encrypted as a fake message and on the next stage, 
+steganography would hide the origin, pretending no need to encrypt on the next stage.But once steganography is broken, 
+means that the message is completely revealed.
+
+3_main_goals [CIA==Confidentiality,Integrity,Authentication] of cryptography
+
+Confidentiality
+ == cryptographic algorithms attempt to keep secure the contents of a message sent to smb. making impossible 
+to encript the message without the knowledge of the secret key which owns the opposite side.
+
+Integrity
+== cryptographic algorithm verifies that a message was not modified in transit. Ciphers provide a means to calculate 
+Message Authetication Code [MAC] verifies the integrity of a message.
+
+Authentication
+== Makes sure who sends the message, so the knowlede of the encryption key means the message comes from the claimed
+sender., if its known to a group off people, it's difficult to define the sender.
+
+The fourth global: non-repudiation:
+
+Non-repudiation==some of senders cannot deny they send the message. A message that decrypts with a public key must have
+been written by the owner of the private key [or someone who has access to it] and the sender cannot deny sending it
+[unless they were negligent in protecting their pvate key]
+
+Kerchckoff's principle
+"A cryptosystem should be secure even if everything about the system is public, exept  the key is public knowledge".
+No knowledge how the system works => no opportunity to identify weaknesses which could allow it be more vulnerable
+and be broken.
+
+Is a structure on which many ciphers such as the Lucifer cipher are based .1973. Multi-round sipher that drives the 
+current internal state of the cipher into 2 parts and operates only on a single partin each round of encryption or
+decryption. Between the rounds, left and right sides of the internal states switch sides.
+
+One-Time_Pad
+
+The only completely unbreakable cipher. Assuming the pad is randomly generated, non-reuse [=> "one-time pad"],not leaked,
+hece it is impossible to learn even 1 bit of plaintext of a message from ciphertexxt. Done by hand, non using a computer.
+
+Encryption and Decryption
+
+Encryption is based on XOR operation [2 identical bits, 2 zeros or 2 ones]
+It's the same length as the message to encrypt ;) hihi 
+So, encrypt the letters to binary => ascii, and then perform exclusive or for each bit of the message with each bit of 
+the one-time pad!!!
+
+Decryption
+
+perform exclusive-or of the cipher which gives original message works, cause x^x = 0 
+
+Issue with re-use
+since it requires a secret key the same lenth as the message itself, more logical to generate large andom key and
+use for multiple encryptions. Using the same pad for multy encryptions => breaks the security of the one-time pad
+protocol and could reveal the secret key/ plaintext.
+
+Narrowing down options using ciphertext
+
+The possible values of the message => [ASCII] encoded letters or spaces, we can determine that the letter cannot be 
+HIJKNU or Z. The exclusive or is outside the range of possible values in alphabet
+
+Spaces reveal a lot
+
+Reveals the letter of the next letter of the other message and the byte of the pad [the pad is the XOR of a ciphertext 
+byte and the coresponding byte of plaintext.]
+
+Disadvantage
+
+The pad is the same length as the message.
+Each pad can only once 
+
+Advantages
+
+Completely unbreakable. A it could be 0 or 1 => cupher has wqual probability of being a 0 or 1 in the plaintext.
+Is one of the best protocol when the work must be done by hand, without of aid of computer is illegal or anvilable.
+Two parities are in a secure enviroment, and need to depart 2 seperate secure enviroments with perfect security.
+
+
+
+Feistel_cipher_[Feistel Network]
+
+s a structure on which many ciphers such as the Lucifer cipher are based .1973. Multi-round sipher that drives the 
+current internal state of the cipher into 2 parts and operates only on a single partin each round of encryption or
+decryption. Between the rounds, left and right sides of the internal states switch sides.
+s a structure on which many ciphers such as the Lucifer cipher are based .1973. Multi-round sipher that drives the 
+current internal state of the cipher into 2 parts and operates only on a single partin each round of encryption or
+decryption. Between the rounds, left and right sides of the internal states switch sides.
+
+
+The steps for encryption.
+
+1. Key exchanging between the sides via a secure channel.
+2.  
+
