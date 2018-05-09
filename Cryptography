@@ -99,7 +99,7 @@ Two parities are in a secure enviroment, and need to depart 2 seperate secure en
 
 
 Feistel_cipher_[Feistel Network]
-
+i
 s a structure on which many ciphers such as the Lucifer cipher are based .1973. Multi-round sipher that drives the 
 current internal state of the cipher into 2 parts and operates only on a single partin each round of encryption or
 decryption. Between the rounds, left and right sides of the internal states switch sides.
@@ -111,5 +111,14 @@ decryption. Between the rounds, left and right sides of the internal states swit
 The steps for encryption.
 
 1. Key exchanging between the sides via a secure channel.
-2.  
+2. Breaking length into parts that cipher accepts. for each prt [block] following stepas re taken.
+3. Split plaintex into a left and right peaces L[0] & R[0]
+4. Set the value of round key 0 to the initial secret key. RK[0]=S. RK is the round key.
+5. The left part of the round i+1 is set as the right side of round i, which is L[i+1] = R[i].
+6. Evaluates the function F[R[i],RK[i]] R[i] is the right side of the current round. The result is exclusive-ored
+   with L[i] and stored as the right side of round i+1 which is R[i+1]= L[i] exclusiveored F[R[i],RK[i]]
+7. If not the last round, evaluates the function K[RK[i]] and stores the result as round key i+1 == RK[i]=K[RK[i]].
+8. Repeats 5-7 steps for n rounds.
+9. L[n] & R[n] are combined to create the ciphertext block for this plaintex block.
+10. All ciphertext blocks combined to a single ciphertext C, sends the result C to Rx.    
 
