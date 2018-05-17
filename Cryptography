@@ -122,3 +122,84 @@ The steps for encryption.
 9. L[n] & R[n] are combined to create the ciphertext block for this plaintex block.
 10. All ciphertext blocks combined to a single ciphertext C, sends the result C to Rx.    
 
+The Encryption Phase
+
+The plain text split into 2 pieces. The right piece of one round becomes the left piece of the text. The left piece is 
+exclusive-ored with the result of performing the function F[the function which makes a Feistel cipher unique from other 
+Feistel cipers, where  encryption happens and its security is vital to the security of tht cipher, comletly discards the 
+round key input and operates only on the plaintext can be brockes, as all attacker has to do is guess the plaintext and 
+confirm] that the ciphertext matches on the right piece. The result of this is placed on the right side of the next round 
+which means that the 2 peases of the original plaintext will be transformed in alternate rounds[whether is in the right 
+side during a round moves on to the next round unchainged].
+
+Key Scheduling
+
+This acts as an input to each round of the cipher. There are 2 possible options for a key schedule.
+1. Key for each round of the cipher [which is the same as "round key"] included in the secret key shared by the 2 parties
+which is a long shared secret key.
+2. The shared secret key is used as an input to a "key expansion" function which performs some operation on the previous 
+round key or the current internal state of the key generation algorithm to generate the next round key.
+
+The K function transforms the initial secret key into round key for each round of encryption. this function must be selected 
+to maintain the key space of the encryption function. If 64-bit secret key space shriks to 32 bits, then keys in order to decrypt 
+the ciphertext.
+
+Decryption in a Feistel Network
+
+The major priority is  that the same stucture can be used for encryption and decryption. For the encrypted with the Feistel network
+shown in the diagram we can use the exact same stucture to decrypt. The only difference is that in decryption tound key in reverse is 
+used.
+How to decrypt Feistel network.
+
+1. 2 Parts exchange the secret key  S, through a secure channel and 1 sends to 2 a ciphertext C.
+2. 2 part calculates the round key for all rounds using the key scheduling function K i.e. RK (i+1)=K[RK(i)] 
+3. 2 part breaks C into blocks of the length that the ciphertext accepts. Forr each following steps followed.
+4. 2 part splits the ciphertext block into a left piece and a right piece. L[n] and R[n]
+5. The right side of the round (i) is simpli the left side of round (i+1) => R(i)=L(i+1)
+6. L(i) is calculated  as L(i)=R(i+1)ixoredF[R(i),RK(i)]. which works cos of xor-function following property 
+	A=B xored C implies B=A xnored C.
+7. 1 part repeats 5-6 steps for n - rounds
+8. L(0) and R(0) are combined to create the plaintext  block for this ciphertext block.
+9. All plaintext blocks are combined to a single plaintext P.
+
+Decryption Mechanism.
+
+The same operation is used to perform and undo the itself. 
+1. The right half undoes itself as all that happens is that something swithces sides.
+2. Undoing the left half depends on 2 crucial things.
+	1.  we have all the information that was avilable to the function F during the encryption phase [R(i) and  RK(i)]
+	2. The xor-function has property of B xored B =0 for all values of B. A=B xored C => A xored C=B xored C xored C= Bxored0 = b
+	A=B xored C implies A xored C=B => L(i)=R(i+1) xored F[R(i),RK(i)
+This will work for an operation that is its own inverse [likw exclusive-oe]  which is why Feistel networks always use exclusive-or 
+for changing the transformation half of the state in a round. 
+
+Making Strong Feistel Chipher
+
+Feistel structure does not clrearly map to the cryptographic principles of confusion[which requres based on several bits of the shared 
+secret key for each bits of the ciphertext] and diffusion [ means that a change of a single bit of the plaintextshould change roughly 
+half of the bits of the bits of the ciphertext after encryption [vice versa after decryption]]. All of these properties must be handled 
+within the round function. F which is not specified as part of the Feistel structure.
+
+Advantages
+
+2 baisic advantages.
+1. Structural reusability. As the same structured is used to encrypt and decrypd as a long as the key schedule is reversed for the decryption
+which is usefull from the sight of the hardwere implementations of ciphers since all of the encryption logic does not have to be reimplemented
+in reverceto decrypt.
+2. The ability to use one-way round functions. As F does not have to be reversible. Most ciphers require that every transformation of the 
+plaintext performed in encryption be reversible so that they can undone in decryption. 
+
+Disadvantages of Feistel Ciphers
+
+Limited ability to be parallelized as compared to other ciphers. In other ciphers the entire internal state of the cipher changed  with each round
+Feistel chipher only changes part of the internal state each round.
+
+DES & 3DES Algorithms [Data encryption standart and tripple DES]
+
+DES == 16rund Feistel cipher which takes input 64-bit input & a 64-bit secret key with 3 main stages.
+
+1. Initial permutation.
+2. Round function [16 times]
+3. Final permutation 
+
+
