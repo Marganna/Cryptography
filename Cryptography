@@ -198,8 +198,68 @@ DES & 3DES Algorithms [Data encryption standart and tripple DES]
 
 DES == 16rund Feistel cipher which takes input 64-bit input & a 64-bit secret key with 3 main stages.
 
-1. Initial permutation.
+1. Initial permutation. [are all permutation operations=>output the input they receive after applying a specific permutation.]
 2. Round function [16 times]
 3. Final permutation 
 
+DES round function 
+
+swaps the left and tight side of the inputs and applies the F function during one of the swaps.
+DES consists of several steps
+
+1 The input half-block is expanded using an expansion
+
+2 The expanded input is exclusive-ored with the round key
+
+3 The result is broken into 8-6 bit pieces and each is passed through a unique substitution box or S-Box
+
+4 The result pass through permutation function P
+
+The E-function, S-Boxes, and P function are described in more detail as follows in the followsing sections.
+
+The DES key schedule
+
+the key schedule of DES consists of two main stages: the initial key permutation using the permtated choice 1 algorithm and the
+generation of the round keys using a shift operation of the permuted choice 2 algorithm. 
+
+The initial permutation of DES chnges the order of the plaintex prior to the first round of encryption,makes no attempt to 
+randomize the data in the table.After initial permutation functions begin consisting of E function, which is used to expand the 32-bit input
+to a round's F function into 48-bit block. The E function is fairly straightforward. The first 2 bits of each eight-bit block are the same 
+as the last two bits of the previouse block [wraps around to the last block in the case are the first row].Remaining 4 columns are the bits 
+of the input in order starting with the second bit.After E-function comes exlusice-or [ in round function] the 48 bit output from the E 
+function is excclusive-ored with the 48-bit round key. Then DES S-boxes are implemented [in round function] th input , which is th e output
+of exclusive or, is broken into eight six-bit blocks each of them passes different substitution boxes [S-Box]. To use S-box row and column are
+used using the outer two and inner four bits of the binary representation of the input using special format table. Then comes P-function[the
+last step of the round function] encryption stage[in round function]. which in DES is another permutaion function. It takes a 32 bit blocks. 
+This permutation is not random and is the same for all rounds of DES. The final permutation occurs after the sixteen rounds of DES are completed 
+which is identical to the original input of the initial permutation.
+
+Shift operation.
+
+For each round - subkeys are shifted to the left by a set amount which are cumulative and the shift anout for each round.
+
+Permuted chise 2
+
+After shifting occurs the round key is generated using the permuted choisr 2 [PC2] algorithm which taked 56 bit key [each of them is used in an average 
+of 14 of 16 round keys] as input and  produces a 48 - bit round key. 
+
+Decription with DES
+
+The same steps as encryption apart from the fact that the round key need to be used in reverse order. 
+
+3DES:Triple DES 
+
+Due to the small size of secret key  the DES algorithm is not currently in use in its original form => a variant of DES invented, called [tripleDEZ] 
+with triple size of secret key.
+
+Advantages
+
+DES is broken, 3DES is a secure cipher nowdays. DES has desirable properties of confusion and diffusion each of bit is based upon multiple bits of 
+the key and changing a single bit of plaintext changes half of the bits of ciphertext in average. Due to the Feistel structure and uncomplicated logic 
+DES is relatively easy to implement, uses 8 distinct s-Boxes, which increases its footprint.
+
+Disadvantages
+
+The main disatvantage of DES is that it is broken using brute-force search. While using 3DES mitigates this issue at the cost of increasing execution
+time. DES is vulnerable to attack using linear cryptanalysis. takes 2^47 known plaintexts to break DES in this manner.
 
